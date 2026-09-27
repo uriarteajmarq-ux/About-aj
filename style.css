@@ -1,0 +1,208 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 70px;
+}
+
+:root {
+  --bg: #f7f8fc;
+  --text: #222;
+  --nav-bg: rgba(255, 255, 255, 0.75);
+  --nav-border: #e6e8f0;
+  --nav-text: #12213f;
+  --card-bg: #ffffff;
+  --card-border: #e6e8f0;
+  --card-shadow: rgba(18, 33, 63, 0.05);
+  --heading: #12213f;
+  --body-text: #444;
+  --avatar-border: #eef2fb;
+  --badge-bg: #eef2fb;
+  --badge-text: #12213f;
+  --footer-text: #999;
+}
+
+[data-theme="dark"] {
+  --bg: #14151c;
+  --text: #e8e9f0;
+  --nav-bg: rgba(28, 29, 39, 0.75);
+  --nav-border: #2b2c3a;
+  --nav-text: #e8e9f0;
+  --card-bg: #1c1d27;
+  --card-border: #2b2c3a;
+  --card-shadow: rgba(0, 0, 0, 0.35);
+  --heading: #f0f1f8;
+  --body-text: #c2c3d1;
+  --avatar-border: #2b2c3a;
+  --badge-bg: #2b2c3a;
+  --badge-text: #e8e9f0;
+  --footer-text: #777;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+
+/* ===== Flexbox nav bar ===== */
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  background: var(--nav-bg);
+  padding: 14px;
+  border-bottom: 1px solid var(--nav-border);
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+nav a {
+  color: var(--nav-text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 4px 2px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+nav a:hover {
+  border-color: var(--nav-text);
+}
+
+#theme-toggle {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  border: 1px solid var(--nav-border);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+#theme-toggle:hover {
+  border-color: var(--nav-text);
+}
+
+/* ===== Layout ===== */
+main {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* Box model spacing */
+.card {
+  background: var(--card-bg);
+  padding: 24px;
+  margin: 16px 0;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px var(--card-shadow);
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.card:hover {
+  box-shadow: 0 0 0 1px #7c9cf0, 0 6px 24px rgba(89, 122, 240, 0.35);
+  transform: translateY(-2px);
+}
+
+.card h2 {
+  margin-top: 0;
+  font-size: 1.15rem;
+  color: var(--heading);
+}
+
+.card p {
+  margin: 8px 0 0;
+  color: var(--body-text);
+}
+
+.avatar {
+  width: 170px;
+  aspect-ratio: 5 / 5;
+  border-radius: 10px;
+  object-fit: cover;
+  object-position: center;
+  border: 2px solid var(--avatar-border);
+  flex-shrink: 0;
+}
+
+/* ===== Profile card ===== */
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.profile-info h2 {
+  margin: 0 0 6px;
+  font-size: 1.15rem;
+  color: var(--heading);
+  height: 1.4em;
+}
+
+.profile-info .typewriter::after {
+  content: "|";
+  margin-left: 2px;
+  color: var(--heading);
+  animation: blink 0.9s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Skills list as badges */
+.skills {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  margin: 8px 0 0;
+}
+
+.skills li {
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.skills li:hover {
+  box-shadow: 0 0 0 1px #7c9cf0, 0 4px 14px rgba(89, 122, 240, 0.4);
+  transform: translateY(-2px);
+}
+
+footer {
+  text-align: center;
+  padding: 20px 12px 32px;
+  color: var(--footer-text);
+  font-size: 0.85rem;
+}

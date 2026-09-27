@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>About Me</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ===== Navigation ===== -->
+  <nav>
+    <a href="#top">Home</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">
+      <span id="theme-icon">🌙</span>
+      <span id="theme-label">Dark</span>
+    </button>
+  </nav>
+  <!-- ===== Main Content ===== -->
+  <main id="top">
+    <section class="card profile-card">
+      <img src="aj.jpg" alt="Photo of AJ" class="avatar">
+      <div class="profile-info">
+        <h2><span id="typewriter" class="typewriter"></span></h2>
+      </div>
+    </section>
+    <section class="card" id="about">
+      <h2>About Me</h2>
+      <p>I'm an IT student who enjoys building practical programming and web projects, from small scripts to full systems. I like figuring out how things work under the hood and turning that into something people can actually use. Outside of class, I'm always tinkering with new project ideas to sharpen my skills.</p>
+    </section>
+    <section class="card">
+      <h2>My Skills</h2>
+      <ul class="skills">
+        <li>HTML &amp; CSS</li>
+        <li>JavaScript</li>
+        <li>PHP</li>
+        <li>Problem Solving</li>
+        <li>Web Development</li>
+      </ul>
+    </section>
+    <section class="card" id="contact">
+      <h2>Contact</h2>
+      <p>Email: uriarte.ajmar.q@gmail.com</p>
+      <p>Phone: 09751063909</p>
+    </section>
+
+  </main>
+  <!-- ===== Footer ===== -->
+  <footer>
+    <p>&copy; 2026 AJ</p>
+  </footer>
+
+  <script>
+    // ===== Theme toggle =====
+    const root = document.documentElement;
+    const toggleBtn = document.getElementById("theme-toggle");
+    const themeIcon = document.getElementById("theme-icon");
+    const themeLabel = document.getElementById("theme-label");
+
+    function applyTheme(theme) {
+      if (theme === "dark") {
+        root.setAttribute("data-theme", "dark");
+        themeIcon.textContent = "☀️";
+        themeLabel.textContent = "Light";
+      } else {
+        root.removeAttribute("data-theme");
+        themeIcon.textContent = "🌙";
+        themeLabel.textContent = "Dark";
+      }
+    }
+
+    let savedTheme = "light";
+    try {
+      savedTheme = localStorage.getItem("aj-theme") || "light";
+    } catch (e) {}
+    applyTheme(savedTheme);
+
+    toggleBtn.addEventListener("click", () => {
+      const current = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
+      const next = current === "dark" ? "light" : "dark";
+      applyTheme(next);
+      try {
+        localStorage.setItem("aj-theme", next);
+      } catch (e) {}
+    });
+
+    // ===== Typewriter =====
+    const words = ["AJ-Mar Uriarte", "IT Student | Aspiring Developer"];
+    const el = document.getElementById("typewriter");
+    let wordIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    function tick() {
+      const current = words[wordIndex];
+
+      if (!deleting) {
+        charIndex++;
+        el.textContent = current.slice(0, charIndex);
+        if (charIndex === current.length) {
+          deleting = true;
+          setTimeout(tick, 1400); // pause after fully typed
+          return;
+        }
+      } else {
+        charIndex--;
+        el.textContent = current.slice(0, charIndex);
+        if (charIndex === 0) {
+          deleting = false;
+          wordIndex = (wordIndex + 1) % words.length;
+        }
+      }
+
+      setTimeout(tick, deleting ? 45 : 90);
+    }
+
+    tick();
+  </script>
+</body>
+</html> 
